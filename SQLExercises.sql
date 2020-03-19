@@ -15,6 +15,10 @@ UPDATE Album SET AlbumLength = '1400' WHERE Title = 'The Peace and The Panic'
 UPDATE Album SET GenreId = '9' WHERE Title = 'The Peace and The Panic'
 
 --Exercise 5
+SELECT s.Title, a.Title, ar.ArtistName FROM Song s 
+LEFT JOIN Album a  ON a.Id = s.AlbumId
+LEFT JOIN Artist ar on ar.Id = s.ArtistId
+WHERE s.ArtistId = '31'
 
 --Exercise 6
 SELECT AlbumId, COUNT(*) AS SongsPerAlbum FROM Song GROUP BY AlbumId
@@ -32,3 +36,8 @@ SELECT Title, AlbumLength FROM Album WHERE AlbumLength = (SELECT MAX(AlbumLength
 SELECT Title, SongLength FROM Song WHERE SongLength = (SELECT MAX(SongLength) FROM Song)
 
 --Exercise 11
+SELECT s.Title, s.SongLength, a.Title  FROM Song s
+LEFT JOIN Album a ON a.Id = s.AlbumId
+WHERE s.SongLength = (SELECT MAX(SongLength) FROM Song)
+
+
